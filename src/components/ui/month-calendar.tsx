@@ -115,8 +115,9 @@ export function MonthCalendar({
             return (
               <div
                 key={dateStr}
+                onClick={() => onSelect?.(dateStr)}
                 className={cn(
-                  "min-h-[72px] rounded-md border p-1 flex flex-col gap-0.5",
+                  "min-h-[72px] rounded-md border p-1 flex flex-col gap-0.5 cursor-pointer hover:bg-accent",
                   dateStr === today && "ring-1 ring-primary/30",
                 )}
               >

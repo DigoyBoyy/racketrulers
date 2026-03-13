@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
+  BookOpen,
   Calendar,
   LogOut,
   Menu,
@@ -40,6 +41,11 @@ interface DashboardShellProps {
 }
 
 const navItems = [
+  {
+    title: "Book Coach",
+    href: "/book/coach-john",
+    icon: BookOpen,
+  },
   {
     title: "My Tournaments",
     href: "/dashboard/tournaments",

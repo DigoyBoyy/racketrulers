@@ -20,7 +20,7 @@ import { BookingsList } from "./bookings-list";
 const SECTIONS = [
   { id: "profile", label: "Profile Settings", icon: User },
   { id: "availability", label: "Weekly Availability", icon: Calendar },
-  { id: "calendar", label: "Month Overview", icon: CalendarDays },
+  { id: "calendar", label: "Booking Overview", icon: CalendarDays },
   { id: "bookings", label: "Bookings", icon: BookOpen },
 ] as const;
 
