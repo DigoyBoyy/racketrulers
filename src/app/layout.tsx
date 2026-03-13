@@ -4,6 +4,7 @@ import "./globals.css";
 import { TRPCReactProvider } from "@/lib/trpc/client";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { Footer } from "@/components/layout/footer";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -40,6 +41,7 @@ export default function RootLayout({
         <TRPCReactProvider>
           <AuthSessionProvider>
             {children}
+            <Footer />
             <Toaster />
           </AuthSessionProvider>
         </TRPCReactProvider>
