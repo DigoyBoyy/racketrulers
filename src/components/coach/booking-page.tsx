@@ -35,16 +35,24 @@ export function BookingPage({ slug }: BookingPageProps) {
   const [weekStart, setWeekStart] = useState(() => getMonday(now));
 
   const { data: coach, isLoading: coachLoading } = useQuery(
-    trpc.coach.getPublic.queryOptions({ slug })
+    trpc.coach.getPublic.queryOptions({ slug }),
   );
 
-  const from = useMemo(() => toLocalDateStr(new Date()), []);
+  // const from = useMemo(() => toLocalDateStr(new Date()), []);
+
+  // const to = useMemo(() => {
+  //   const d = new Date();
+  //   d.setDate(d.getDate() + 56);
+  //   return toLocalDateStr(d);
+  // }, []);
+
+  const from = useMemo(() => {
+    return toLocalDateStr(new Date(currentYear, currentMonth, 1));
+  }, [currentMonth, currentYear]);
 
   const to = useMemo(() => {
-    const d = new Date();
-    d.setDate(d.getDate() + 56);
-    return toLocalDateStr(d);
-  }, []);
+    return toLocalDateStr(new Date(currentYear, currentMonth + 1, 0));
+  }, [currentMonth, currentYear]);
 
   const { data: availableSlots } = useQuery({
     ...trpc.bookings.getAvailableSlots.queryOptions({ slug, from, to }),
@@ -58,7 +66,7 @@ export function BookingPage({ slug }: BookingPageProps) {
         toast.success("Booking confirmed");
       },
       onError: (err) => toast.error(err.message),
-    })
+    }),
   );
 
   if (coachLoading) {
@@ -96,7 +104,12 @@ export function BookingPage({ slug }: BookingPageProps) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!selectedDate || !selectedSlot || !bookerName.trim() || !bookerEmail.trim())
+    if (
+      !selectedDate ||
+      !selectedSlot ||
+      !bookerName.trim() ||
+      !bookerEmail.trim()
+    )
       return;
 
     createBooking.mutate({

@@ -71,11 +71,21 @@ export function MonthCalendar({
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-3">
-        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={prevMonth}>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8"
+          onClick={prevMonth}
+        >
           <ChevronLeft className="h-4 w-4" />
         </Button>
         <span className="text-sm font-medium">{monthLabel}</span>
-        <Button variant="ghost" size="icon" className="h-8 w-8" onClick={nextMonth}>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8"
+          onClick={nextMonth}
+        >
           <ChevronRight className="h-4 w-4" />
         </Button>
       </div>
@@ -91,7 +101,10 @@ export function MonthCalendar({
         ))}
 
         {Array.from({ length: firstDayOffset }).map((_, i) => (
-          <div key={`empty-${i}`} className={hasExpandedCells ? "min-h-[72px]" : ""} />
+          <div
+            key={`empty-${i}`}
+            className={hasExpandedCells ? "min-h-[72px]" : ""}
+          />
         ))}
 
         {Array.from({ length: daysInMonth }).map((_, i) => {
@@ -104,7 +117,7 @@ export function MonthCalendar({
                 key={dateStr}
                 className={cn(
                   "min-h-[72px] rounded-md border p-1 flex flex-col gap-0.5",
-                  dateStr === today && "ring-1 ring-primary/30"
+                  dateStr === today && "ring-1 ring-primary/30",
                 )}
               >
                 {renderDay(dateStr, day)}
@@ -133,7 +146,7 @@ export function MonthCalendar({
                   : isAvailable && !isPast
                     ? "bg-primary/10 hover:bg-primary/20 cursor-pointer font-medium"
                     : "text-muted-foreground opacity-50 cursor-not-allowed",
-                dateStr === today && !isSelected && "ring-1 ring-primary/30"
+                dateStr === today && !isSelected && "ring-1 ring-primary/30",
               )}
             >
               <span>{day}</span>
@@ -146,7 +159,7 @@ export function MonthCalendar({
                         "text-[10px] rounded px-1 leading-tight",
                         isSelected
                           ? "bg-primary-foreground/20 text-primary-foreground"
-                          : "bg-primary/10 text-primary"
+                          : "bg-primary/10 text-primary",
                       )}
                     >
                       {formatSlotTime(slot)}
@@ -158,7 +171,7 @@ export function MonthCalendar({
                         "text-[10px] rounded px-1 leading-tight",
                         isSelected
                           ? "text-primary-foreground/70"
-                          : "text-primary/70"
+                          : "text-primary/70",
                       )}
                     >
                       +{daySlots.length - 3}
