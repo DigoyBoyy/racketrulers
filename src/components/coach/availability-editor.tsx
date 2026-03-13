@@ -5,6 +5,7 @@ import { useTRPC } from "@/lib/trpc/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { AvailabilityCalendar } from "./availability-calendar";
+import { getMonday } from "@/lib/utils";
 import { toast } from "sonner";
 
 interface Slot {
@@ -21,6 +22,7 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
   const [slots, setSlots] = useState<Slot[]>(initialSlots);
+  const [weekStart, setWeekStart] = useState(() => getMonday(new Date()));
 
   useEffect(() => {
     setSlots(initialSlots);
@@ -49,7 +51,12 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
           {setAvailability.isPending ? "Saving..." : "Save Availability"}
         </Button>
       </div>
-      <AvailabilityCalendar slots={initialSlots} onChange={setSlots} />
+      <AvailabilityCalendar 
+        slots={initialSlots} 
+        onChange={setSlots}
+        weekStart={weekStart}
+        onWeekChange={setWeekStart}
+      />
     </div>
   );
 }

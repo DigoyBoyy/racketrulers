@@ -12,8 +12,9 @@ import {
   useSensors,
 } from "@dnd-kit/core";
 import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getMonday } from "@/lib/utils";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const START_HOUR = 6;
@@ -39,6 +40,8 @@ interface Block {
 interface AvailabilityCalendarProps {
   slots: Slot[];
   onChange: (slots: Slot[]) => void;
+  weekStart?: Date;
+  onWeekChange?: (weekStart: Date) => void;
 }
 
 function timeToRow(time: string): number {
@@ -123,10 +126,36 @@ function blocksToSlots(blocks: Block[]): Slot[] {
   }));
 }
 
-export function AvailabilityCalendar({ slots, onChange }: AvailabilityCalendarProps) {
+export function AvailabilityCalendar({ 
+  slots, 
+  onChange, 
+  weekStart = new Date(), 
+  onWeekChange 
+}: AvailabilityCalendarProps) {
   const [blocks, setBlocks] = useState<Block[]>(() => slotsToBlocks(slots));
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [idCounter, setIdCounter] = useState(1000);
+
+  const monday = useMemo(() => getMonday(weekStart), [weekStart]);
+
+  const weekDays = useMemo(() => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(d.getDate() + i);
+      return {
+        name: DAYS[i],
+        date: d.getDate(),
+        fullDate: d,
+      };
+    });
+  }, [monday]);
+
+  const weekLabel = useMemo(() => {
+    const end = new Date(monday);
+    end.setDate(end.getDate() + 6);
+    const opts: Intl.DateTimeFormatOptions = { month: "short", day: "numeric" };
+    return `${monday.toLocaleDateString(undefined, opts)} - ${end.toLocaleDateString(undefined, { ...opts, year: "numeric" })}`;
+  }, [monday]);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
@@ -139,6 +168,22 @@ export function AvailabilityCalendar({ slots, onChange }: AvailabilityCalendarPr
     },
     [onChange]
   );
+
+  function prevWeek() {
+    if (onWeekChange) {
+      const d = new Date(monday);
+      d.setDate(d.getDate() - 7);
+      onWeekChange(d);
+    }
+  }
+
+  function nextWeek() {
+    if (onWeekChange) {
+      const d = new Date(monday);
+      d.setDate(d.getDate() + 7);
+      onWeekChange(d);
+    }
+  }
 
   function handleCellClick(dayOfWeek: number, row: number) {
     // Check if cell is inside an existing block
@@ -225,6 +270,19 @@ export function AvailabilityCalendar({ slots, onChange }: AvailabilityCalendarPr
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      {/* Week Navigation */}
+      {onWeekChange && (
+        <div className="flex items-center justify-between mb-4">
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={prevWeek}>
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <span className="text-sm font-medium">{weekLabel}</span>
+          <Button variant="ghost" size="icon" className="h-8 w-8" onClick={nextWeek}>
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+
       <div className="overflow-x-auto">
         <div
           className="grid min-w-[600px]"
@@ -232,12 +290,13 @@ export function AvailabilityCalendar({ slots, onChange }: AvailabilityCalendarPr
         >
           {/* Header row */}
           <div className="border-b p-1 text-xs font-medium text-muted-foreground" />
-          {DAYS.map((day) => (
+          {weekDays.map(({ name, date }) => (
             <div
-              key={day}
+              key={name}
               className="border-b border-l p-1 text-xs font-medium text-center"
             >
-              {day}
+              <div>{name}</div>
+              <div className="text-sm font-semibold">{date}</div>
             </div>
           ))}
 
@@ -247,7 +306,7 @@ export function AvailabilityCalendar({ slots, onChange }: AvailabilityCalendarPr
               <div className="border-b p-1 text-[10px] text-muted-foreground flex items-start pt-1.5 justify-end pr-2">
                 {rowIndex % 2 === 0 ? label : ""}
               </div>
-              {DAYS.map((_, dayIndex) => {
+              {weekDays.map((_, dayIndex) => {
                 const block = blockLookup.get(`${dayIndex}-${rowIndex}`);
                 const isBlockStart = block && block.startRow === rowIndex;
 
