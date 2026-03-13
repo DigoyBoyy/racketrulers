@@ -58,6 +58,7 @@
     "eslint-config-next": "16.1.6",
     "jsdom": "^28.0.0",
     "playwright": "^1.58.2",
+    "prettier": "^3.8.1",
     "prisma": "^6.19.2",
     "prisma-erd-generator": "^2.4.2",
     "shadcn": "^3.8.4",

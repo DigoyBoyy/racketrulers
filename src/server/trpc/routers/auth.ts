@@ -7,14 +7,14 @@ export const authRouter = createTRPCRouter({
   signup: baseProcedure
     .input(
       z.object({
-        inviteCode: z.string().min(1, "Invite code is required"),
+        adminCode: z.string().min(1, "Admin code is required"),
         name: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email"),
         password: z.string().min(8, "Password must be at least 8 characters"),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      const rawCodes = process.env.INVITE_CODES;
+      const rawCodes = process.env.ADMIN_CODES;
       if (!rawCodes) {
         throw new TRPCError({
           code: "FORBIDDEN",
@@ -23,10 +23,10 @@ export const authRouter = createTRPCRouter({
       }
 
       const validCodes = rawCodes.split(",").map((c) => c.trim().toUpperCase());
-      if (!validCodes.includes(input.inviteCode.trim().toUpperCase())) {
+      if (!validCodes.includes(input.adminCode.trim().toUpperCase())) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "Invalid invite code",
+          message: "Invalid admin code",
         });
       }
 
