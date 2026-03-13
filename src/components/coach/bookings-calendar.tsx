@@ -61,6 +61,26 @@ export function BookingsCalendar() {
     return map;
   }, [data]);
 
+  const availableDates = useMemo(() => {
+    const dates = new Set<string>();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = new Date(year, month, day).toISOString().split("T")[0];
+      dates.add(dateStr);
+    }
+    return dates;
+  }, [currentDate]);
+
+  const slotsByDate = useMemo(() => {
+    const map: Record<string, string[]> = {};
+    for (const dateStr of Object.keys(bookingsByDate)) {
+      map[dateStr] = bookingsByDate[dateStr].map(b => b.startTime);
+    }
+    return map;
+  }, [bookingsByDate]);
+
   const bookingsByMonth = useMemo(() => {
     const year = currentDate.getFullYear();
     const counts: number[] = Array(12).fill(0);
@@ -110,10 +130,10 @@ export function BookingsCalendar() {
         ))}
 
         <div className="ml-auto flex items-center gap-2">
-          <Button size="sm" onClick={() => changePeriod(-1)}>
+          <Button variant="ghost" size="sm" onClick={() => changePeriod(-1)}>
             ◀
           </Button>
-          <span className="text-sm font-medium">
+          <span className="text-sm font-medium w-[15ch] text-center">
             {viewMode === "year" && currentDate.getFullYear()}
             {viewMode === "month" &&
               currentDate.toLocaleString(undefined, {
@@ -125,11 +145,13 @@ export function BookingsCalendar() {
                 const start = getMonday(currentDate);
                 const end = new Date(start);
                 end.setDate(end.getDate() + 6);
-                return `${toLocalDateStr(start)} - ${toLocalDateStr(end)}`;
+                const startStr = start.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+                const endStr = end.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+                return `${startStr} - ${endStr}`;
               })()}
             {viewMode === "day" && toLocalDateStr(currentDate)}
           </span>
-          <Button size="sm" onClick={() => changePeriod(1)}>
+          <Button variant="ghost" size="sm" onClick={() => changePeriod(1)}>
             ▶
           </Button>
         </div>
@@ -174,6 +196,7 @@ export function BookingsCalendar() {
         <MonthCalendar
           month={currentDate.getMonth()}
           year={currentDate.getFullYear()}
+          availableDates={availableDates}
           onSelect={(dateStr) => {
             setCurrentDate(new Date(dateStr));
             setViewMode("day");
@@ -184,27 +207,7 @@ export function BookingsCalendar() {
             d.setMonth(m);
             setCurrentDate(d);
           }}
-          renderDay={(dateStr, day) => {
-            const dayBookings = bookingsByDate[dateStr] ?? [];
-            return (
-              <>
-                <span className="text-xs font-medium text-muted-foreground">
-                  {day}
-                </span>
-                {dayBookings.map((b) => (
-                  <Badge
-                    key={b.id}
-                    variant={
-                      b.status === "CONFIRMED" ? "default" : "secondary"
-                    }
-                    className="text-[10px] truncate justify-start font-normal px-1 py-0"
-                  >
-                    {b.startTime} {b.bookerName}
-                  </Badge>
-                ))}
-              </>
-            );
-          }}
+          slotsByDate={slotsByDate}
         />
       ) : (
         <div className="grid grid-cols-1 gap-4">
@@ -234,7 +237,7 @@ export function BookingsCalendar() {
 
                 {dayBookings.length === 0 ? (
                   <div className="mt-4 text-sm text-muted-foreground">
-                    No bookings for this {viewMode}.
+                    No bookings for this day.
                   </div>
                 ) : (
                   <div className="mt-4 space-y-2">
