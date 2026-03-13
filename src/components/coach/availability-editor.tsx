@@ -117,7 +117,7 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
         <Button variant="ghost" size="sm" onClick={() => changeYear(-1)}>
           ◀
         </Button>
-        <span className="text-sm font-medium">{selectedYear}</span>
+        <span className="text-sm font-medium w-[4ch] text-center">{selectedYear}</span>
         <Button variant="ghost" size="sm" onClick={() => changeYear(1)}>
           ▶
         </Button>
@@ -127,7 +127,7 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
         <Button variant="ghost" size="sm" onClick={() => changeMonth(-1)}>
           ◀
         </Button>
-        <span className="text-sm font-medium">
+        <span className="text-sm font-medium w-[9ch] text-center">
           {new Date(selectedYear, selectedMonth).toLocaleString(undefined, { month: "long" })}
         </span>
         <Button variant="ghost" size="sm" onClick={() => changeMonth(1)}>
