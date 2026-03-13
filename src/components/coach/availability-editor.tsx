@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTRPC } from "@/lib/trpc/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -21,12 +21,34 @@ interface AvailabilityEditorProps {
 export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const [slots, setSlots] = useState<Slot[]>(initialSlots);
+  const initialWeekKey = useMemo(() => getMonday(new Date()).toISOString(), []);
   const [weekStart, setWeekStart] = useState(() => getMonday(new Date()));
 
+  // Tracks availability per week so the calendar content changes when the week changes.
+  const [availabilityByWeek, setAvailabilityByWeek] = useState<Record<string, Slot[]>>(() => {
+    return { [initialWeekKey]: initialSlots };
+  });
+
+  const slots = availabilityByWeek[weekStart.toISOString()] ?? [];
+
+  const setSlots = (newSlots: Slot[]) => {
+    const key = weekStart.toISOString();
+    setAvailabilityByWeek((prev) => ({
+      ...prev,
+      [key]: newSlots,
+    }));
+  };
+
   useEffect(() => {
-    setSlots(initialSlots);
-  }, [initialSlots]);
+    const key = weekStart.toISOString();
+    setAvailabilityByWeek((prev) => {
+      if (prev[key]) return prev;
+      return {
+        ...prev,
+        [key]: key === initialWeekKey ? initialSlots : [],
+      };
+    });
+  }, [weekStart, initialWeekKey, initialSlots]);
 
   const setAvailability = useMutation(
     trpc.coach.setAvailability.mutationOptions({
@@ -51,8 +73,8 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
           {setAvailability.isPending ? "Saving..." : "Save Availability"}
         </Button>
       </div>
-      <AvailabilityCalendar 
-        slots={initialSlots} 
+      <AvailabilityCalendar
+        slots={slots}
         onChange={setSlots}
         weekStart={weekStart}
         onWeekChange={setWeekStart}

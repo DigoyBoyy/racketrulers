@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState, useMemo, useCallback } from "react";
+import { Fragment, useState, useMemo, useCallback, useEffect } from "react";
 import {
   DndContext,
   DragOverlay,
@@ -126,15 +126,21 @@ function blocksToSlots(blocks: Block[]): Slot[] {
   }));
 }
 
-export function AvailabilityCalendar({ 
-  slots, 
-  onChange, 
-  weekStart = new Date(), 
-  onWeekChange 
+export function AvailabilityCalendar({
+  slots,
+  onChange,
+  weekStart = new Date(),
+  onWeekChange,
 }: AvailabilityCalendarProps) {
   const [blocks, setBlocks] = useState<Block[]>(() => slotsToBlocks(slots));
   const [selectedBlockId, setSelectedBlockId] = useState<string | null>(null);
   const [idCounter, setIdCounter] = useState(1000);
+
+  // Update blocks when slots change (e.g., when switching week)
+  useEffect(() => {
+    setBlocks(slotsToBlocks(slots));
+    setSelectedBlockId(null);
+  }, [slots]);
 
   const monday = useMemo(() => getMonday(weekStart), [weekStart]);
 
