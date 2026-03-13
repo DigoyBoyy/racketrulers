@@ -63,6 +63,7 @@ export const authRouter = createTRPCRouter({
         name: true,
         email: true,
         image: true,
+        role: true,
         createdAt: true,
       },
     });
@@ -73,4 +74,51 @@ export const authRouter = createTRPCRouter({
 
     return user;
   }),
+
+  createAdminUser: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().min(1, "Name is required"),
+        email: z.string().email("Invalid email"),
+        password: z.string().min(8, "Password must be at least 8 characters"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      // Check if current user is ADMIN
+      const currentUser = await ctx.prisma.user.findUnique({
+        where: { id: ctx.userId },
+        select: { role: true },
+      });
+
+      if (!currentUser || currentUser.role !== 'ADMIN') {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "Only admins can create admin users",
+        });
+      }
+
+      const existing = await ctx.prisma.user.findUnique({
+        where: { email: input.email },
+      });
+
+      if (existing) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "An account with this email already exists",
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(input.password, 12);
+
+      const user = await ctx.prisma.user.create({
+        data: {
+          name: input.name,
+          email: input.email,
+          password: hashedPassword,
+          role: 'ADMIN',
+        },
+      });
+
+      return { id: user.id, email: user.email };
+    }),
 });

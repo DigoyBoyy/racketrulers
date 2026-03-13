@@ -9,6 +9,7 @@ import {
   LogOut,
   Menu,
   Trophy,
+  UserPlus,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -34,6 +35,7 @@ interface DashboardShellProps {
     name?: string | null;
     email?: string | null;
     image?: string | null;
+    role?: string;
   };
 }
 
@@ -50,10 +52,23 @@ const navItems = [
   },
 ];
 
-function NavContent({ pathname }: { pathname: string }) {
+const adminNavItems = [
+  {
+    title: "Create Admin User",
+    href: "/dashboard/admin/create-user",
+    icon: UserPlus,
+  },
+];
+
+function NavContent({ pathname, user }: { pathname: string; user: DashboardShellProps['user'] }) {
+  const allNavItems = [
+    ...navItems,
+    ...(user.role === 'ADMIN' ? adminNavItems : []),
+  ];
+
   return (
     <nav className="flex flex-col gap-1">
-      {navItems.map((item) => {
+      {allNavItems.map((item) => {
         const isActive =
           pathname === item.href || pathname.startsWith(item.href);
         return (
@@ -99,7 +114,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
           </Link>
         </div>
         <div className="flex-1 overflow-y-auto p-4">
-          <NavContent pathname={pathname} />
+          <NavContent pathname={pathname} user={user} />
         </div>
         <Separator />
         <div className="p-4">
@@ -149,7 +164,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                 </Link>
               </div>
               <div className="p-4" onClick={() => setMobileOpen(false)}>
-                <NavContent pathname={pathname} />
+                <NavContent pathname={pathname} user={user} />
               </div>
               <Separator />
               <div className="p-4">
