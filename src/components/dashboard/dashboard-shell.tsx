@@ -94,7 +94,9 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
       {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-screen w-64 flex-col border-r border-border bg-card md:flex">
         <div className="flex h-16 items-center border-b border-border px-5">
-          <RacketRulersLogo size={36} />
+          <Link href="/dashboard">
+            <RacketRulersLogo size={36} />
+          </Link>
         </div>
         <div className="flex-1 overflow-y-auto p-4">
           <NavContent pathname={pathname} />
@@ -142,7 +144,9 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
             <SheetContent side="left" className="w-64 p-0">
               <SheetTitle className="sr-only">Navigation</SheetTitle>
               <div className="flex h-16 items-center border-b border-border px-5">
-                <RacketRulersLogo size={36} />
+                <Link href="/dashboard">
+                  <RacketRulersLogo size={36} />
+                </Link>
               </div>
               <div className="p-4" onClick={() => setMobileOpen(false)}>
                 <NavContent pathname={pathname} />
@@ -159,7 +163,9 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
               </div>
             </SheetContent>
           </Sheet>
-          <RacketRulersLogo size={28} />
+          <Link href="/dashboard">
+            <RacketRulersLogo size={28} />
+          </Link>
         </header>
 
         <main className="flex-1 bg-background p-6">{children}</main>
