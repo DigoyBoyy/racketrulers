@@ -21,6 +21,9 @@ interface AvailabilityEditorProps {
 export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  const now = new Date();
+  const [selectedYear, setSelectedYear] = useState(now.getFullYear());
+  const [selectedMonth, setSelectedMonth] = useState(now.getMonth());
   const initialWeekKey = useMemo(() => getMonday(new Date()).toISOString(), []);
   const [weekStart, setWeekStart] = useState(() => getMonday(new Date()));
 
@@ -50,6 +53,41 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
     });
   }, [weekStart, initialWeekKey, initialSlots]);
 
+  const weeksInMonth = useMemo(() => {
+    const weeks: Date[] = [];
+    const firstDay = new Date(selectedYear, selectedMonth, 1);
+    const lastDay = new Date(selectedYear, selectedMonth + 1, 0);
+    let current = getMonday(firstDay);
+    while (current <= lastDay) {
+      weeks.push(new Date(current));
+      current.setDate(current.getDate() + 7);
+    }
+    return weeks;
+  }, [selectedYear, selectedMonth]);
+
+  const changeYear = (direction: -1 | 1) => {
+    setSelectedYear(prev => prev + direction);
+  };
+
+  const changeMonth = (direction: -1 | 1) => {
+    setSelectedMonth(prev => {
+      const newMonth = prev + direction;
+      if (newMonth < 0) {
+        setSelectedYear(y => y - 1);
+        return 11;
+      }
+      if (newMonth > 11) {
+        setSelectedYear(y => y + 1);
+        return 0;
+      }
+      return newMonth;
+    });
+  };
+
+  const selectWeek = (monday: Date) => {
+    setWeekStart(monday);
+  };
+
   const setAvailability = useMutation(
     trpc.coach.setAvailability.mutationOptions({
       onSuccess: () => {
@@ -73,6 +111,54 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
           {setAvailability.isPending ? "Saving..." : "Save Availability"}
         </Button>
       </div>
+
+      {/* Year and Month Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" onClick={() => changeYear(-1)}>
+          ◀
+        </Button>
+        <span className="text-sm font-medium">{selectedYear}</span>
+        <Button variant="ghost" size="sm" onClick={() => changeYear(1)}>
+          ▶
+        </Button>
+
+        <div className="mx-4 h-6 border-l" />
+
+        <Button variant="ghost" size="sm" onClick={() => changeMonth(-1)}>
+          ◀
+        </Button>
+        <span className="text-sm font-medium">
+          {new Date(selectedYear, selectedMonth).toLocaleString(undefined, { month: "long" })}
+        </span>
+        <Button variant="ghost" size="sm" onClick={() => changeMonth(1)}>
+          ▶
+        </Button>
+      </div>
+
+      {/* Week Selection */}
+      <div className="space-y-2">
+        <p className="text-sm font-medium">Select Week:</p>
+        <div className="flex flex-wrap gap-2">
+          {weeksInMonth.map((monday, idx) => {
+            const end = new Date(monday);
+            end.setDate(end.getDate() + 6);
+            const isSelected = weekStart.toISOString() === monday.toISOString();
+            const startStr = monday.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+            const endStr = end.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+            return (
+              <Button
+                key={idx}
+                variant={isSelected ? "default" : "outline"}
+                size="sm"
+                onClick={() => selectWeek(monday)}
+              >
+                Week {idx + 1}: {startStr} - {endStr}
+              </Button>
+            );
+          })}
+        </div>
+      </div>
+
       <AvailabilityCalendar
         slots={slots}
         onChange={setSlots}
