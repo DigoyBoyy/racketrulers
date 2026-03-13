@@ -12,6 +12,7 @@ async function main() {
       email: 'admin@racketdb.com',
       password: hashedPassword,
       emailVerified: new Date(),
+      role: 'ADMIN',
     },
   });
 

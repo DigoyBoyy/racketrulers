@@ -15,6 +15,13 @@ datasource db {
 
 // ─── Auth Models (Auth.js) ───────────────────────────────────────────────────
 
+enum UserRole {
+  ADMIN
+  CLIENT
+
+  @@map("user_role")
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -22,6 +29,7 @@ model User {
   emailVerified DateTime? @map("email_verified")
   image         String?
   password      String?
+  role          UserRole  @default(CLIENT)
 
   accounts     Account[]
   sessions     Session[]
