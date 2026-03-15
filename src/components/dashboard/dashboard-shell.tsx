@@ -90,8 +90,8 @@ function NavContent({ pathname, user }: { pathname: string; user: DashboardShell
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               isActive
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-sidebar-accent text-sidebar-primary"
+                : "text-sidebar-foreground/75 hover:bg-sidebar-accent hover:text-sidebar-foreground"
             )}
           >
             <item.icon className="h-4 w-4" />
@@ -119,8 +119,8 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
   return (
     <div className="flex min-h-screen">
       {/* Desktop sidebar */}
-      <aside className="sticky top-0 hidden h-screen w-64 flex-col border-r border-border bg-card md:flex">
-        <div className="flex h-16 items-center border-b border-border px-5">
+      <aside className="sticky top-0 hidden h-screen w-64 flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground md:flex">
+        <div className="flex h-16 items-center border-b border-sidebar-border px-5">
           <Link href="/dashboard">
             <RacketRulersLogo size={36} />
           </Link>
@@ -132,7 +132,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
         <div className="p-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-muted">
+              <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors hover:bg-sidebar-accent">
                 <Avatar className="h-8 w-8">
                   <AvatarFallback className="bg-primary/10 text-xs text-primary">
                     {initials}
@@ -140,7 +140,7 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
                 </Avatar>
                 <div className="flex flex-col items-start text-left">
                   <span className="font-medium">{user.name}</span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-xs text-sidebar-foreground/70">
                     {user.email}
                   </span>
                 </div>
@@ -161,16 +161,16 @@ export function DashboardShell({ children, user }: DashboardShellProps) {
 
       {/* Mobile header + content */}
       <div className="flex flex-1 flex-col">
-        <header className="flex h-16 items-center gap-4 border-b border-border bg-card px-4 md:hidden">
+        <header className="flex h-16 items-center gap-4 border-b border-sidebar-border bg-sidebar px-4 text-sidebar-foreground md:hidden">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-64 p-0">
+            <SheetContent side="left" className="w-64 border-sidebar-border bg-sidebar p-0 text-sidebar-foreground">
               <SheetTitle className="sr-only">Navigation</SheetTitle>
-              <div className="flex h-16 items-center border-b border-border px-5">
+              <div className="flex h-16 items-center border-b border-sidebar-border px-5">
                 <Link href="/dashboard">
                   <RacketRulersLogo size={36} />
                 </Link>
