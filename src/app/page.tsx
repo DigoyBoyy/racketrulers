@@ -45,21 +45,22 @@ export default function HomePage() {
       {/* ─── Hero ─── */}
       <section className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pb-16">
         {/* Hero image */}
-        <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-6">
           <Image
-            src="/MainPageBackground3.png"
+            src="/MainPageBackground4.jpg"
             alt=""
-            fill
             priority
-            className="object-cover opacity-[0.52]"
+            width={1600}
+            height={900}
+            sizes="(min-width: 1536px) 1200px, 92vw"
+            className="h-auto w-[min(140vw,1200px)] opacity-[1]"
           />
         </div>
 
         {/* Grid pattern */}
-        <div className="hero-grid absolute inset-0 text-foreground opacity-[0.04]" />
 
         {/* Gradient orbs */}
-        <div className="pointer-events-none absolute left-1/2 top-1/3 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-[100px]" />
+       
         <div className="pointer-events-none absolute right-1/4 top-2/3 h-[300px] w-[300px] rounded-full bg-chart-2/10 blur-[80px]" />
 
         <div className="relative mx-auto max-w-5xl px-6 text-center">
@@ -72,7 +73,9 @@ export default function HomePage() {
               RacketRulers.
             </span>
             <br />
-            Book a coach. Compete like a pro.
+            <span className="text-[oklch(0.86_0.09_92)]">
+              Book a coach. Compete like a pro.
+            </span>
           </h1>
 
           {/* CTAs */}
