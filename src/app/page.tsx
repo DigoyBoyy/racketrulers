@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { RacketRulersLogo } from "@/components/racketrulers-logo";
 import { SiteHeader } from "@/components/public/site-header";
 import {
@@ -57,7 +58,7 @@ export default function HomePage() {
         {/* Hero image */}
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/MainPageBackground2.jpg"
+            src="/MainPageBackground3.png"
             alt=""
             fill
             priority
@@ -271,6 +272,78 @@ export default function HomePage() {
           </div>
         </div>
       </section> */}
+
+      {/* ─── Branch Card ─── */}
+      <section className="border-t border-border/40 py-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="mb-8 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+              Branches
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              Our Main Branches
+            </h2>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            <Card className="gap-0 overflow-hidden py-0">
+              <CardHeader className="border-b border-border/70 py-5">
+                <CardTitle className="text-xl">Smash Plus Branch</CardTitle>
+                <CardDescription>7 doneza st., Valenzuela</CardDescription>
+              </CardHeader>
+              <iframe
+                title="Smash Plus Map"
+                src="https://www.google.com/maps?q=14.6977741,120.9656663&z=17&output=embed"
+                className="h-72 w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <CardContent className="space-y-2 py-5 text-sm">
+                <p className="font-medium">Thursday Saturday and Sunday</p>
+                <p>5:00 pm - 12:00 Midnight</p>
+                <a
+                  href="https://maps.app.goo.gl/NnMPMCHLGNDL6dF1A"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block pt-2 font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Open in Google Maps
+                </a>
+              </CardContent>
+            </Card>
+
+            <Card className="gap-0 overflow-hidden py-0">
+              <CardHeader className="border-b border-border/70 py-5">
+                <CardTitle className="text-xl">Victoria Sports Tower</CardTitle>
+                <CardDescription>
+                  Along Edsa (Carousel and MRT GMA Kamuning station)
+                </CardDescription>
+              </CardHeader>
+              <iframe
+                title="Victoria Sports Tower Map"
+                src="https://www.google.com/maps?q=14.636086,121.04254&z=17&output=embed"
+                className="h-72 w-full"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <CardContent className="space-y-2 py-5 text-sm">
+                <p className="font-medium">Monday Wednesday and Friday</p>
+                <p>5:00 pm - 12:00 Midnight</p>
+                <a
+                  href="https://maps.app.goo.gl/ieAQ1ymuqT1w7w1s7"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-block pt-2 font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Open in Google Maps
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* ─── Footer ─── */}
       {/* <footer className="border-t border-border/40 py-8">

@@ -1,3 +1,11 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 const values = [
   {
     index: "01",
@@ -37,18 +45,22 @@ export default function AboutPage() {
 
       <section className="mt-12 grid gap-5 md:grid-cols-3">
         {values.map((value) => (
-          <article
+          <Card
             key={value.title}
-            className="rounded-xl border border-border/60 bg-card/50 p-6"
+            className="bg-card/50"
           >
-            <div className="inline-flex rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
-              {value.index}
-            </div>
-            <h2 className="mt-4 text-lg font-semibold">{value.title}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-              {value.description}
-            </p>
-          </article>
+            <CardHeader className="gap-3">
+              <div className="inline-flex rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
+                {value.index}
+              </div>
+              <CardTitle className="text-lg">{value.title}</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <CardDescription className="text-sm leading-relaxed">
+                {value.description}
+              </CardDescription>
+            </CardContent>
+          </Card>
         ))}
       </section>
 
@@ -59,16 +71,16 @@ export default function AboutPage() {
         </p>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <article className="overflow-hidden rounded-xl border border-border/60 bg-card/50">
-            <div className="border-b border-border/60 px-5 py-4">
-              <h3 className="font-semibold">Smash Plus</h3>
-              <p className="text-sm text-muted-foreground">Valenzuela</p>
+          <Card className="gap-0 overflow-hidden bg-card/50 py-0">
+            <CardHeader className="border-b border-border/60 py-4">
+              <CardTitle className="text-base">Smash Plus</CardTitle>
+              <CardDescription>Valenzuela</CardDescription>
               <div className="mt-3 space-y-1 text-sm text-muted-foreground">
                 <p>7 doneza st.</p>
                 <p>Thursday Saturday and Sunday</p>
                 <p>5:00 pm - 12:00 Midnight</p>
               </div>
-            </div>
+            </CardHeader>
             <iframe
               title="Smash Plus Map"
               src="https://www.google.com/maps?q=14.6977741,120.9656663&z=17&output=embed"
@@ -77,7 +89,7 @@ export default function AboutPage() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-            <div className="px-5 py-4 text-sm">
+            <CardContent className="py-4 text-sm">
               <a
                 href="https://maps.app.goo.gl/NnMPMCHLGNDL6dF1A"
                 target="_blank"
@@ -86,19 +98,19 @@ export default function AboutPage() {
               >
                 Open in Google Maps
               </a>
-            </div>
-          </article>
+            </CardContent>
+          </Card>
 
-          <article className="overflow-hidden rounded-xl border border-border/60 bg-card/50">
-            <div className="border-b border-border/60 px-5 py-4">
-              <h3 className="font-semibold">Victoria Sports Tower</h3>
-              <p className="text-sm text-muted-foreground">Quezon City</p>
+          <Card className="gap-0 overflow-hidden bg-card/50 py-0">
+            <CardHeader className="border-b border-border/60 py-4">
+              <CardTitle className="text-base">Victoria Sports Tower</CardTitle>
+              <CardDescription>Quezon City</CardDescription>
               <div className="mt-3 space-y-1 text-sm text-muted-foreground">
                 <p>Along Edsa (Carousel and MRT GMA Kamuning station)</p>
                 <p>Monday Wednesday and Friday</p>
                 <p>5:00 pm - 12:00 Midnight</p>
               </div>
-            </div>
+            </CardHeader>
             <iframe
               title="Victoria Sports Tower Map"
               src="https://www.google.com/maps?q=14.636086,121.04254&z=17&output=embed"
@@ -107,7 +119,7 @@ export default function AboutPage() {
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
-            <div className="px-5 py-4 text-sm">
+            <CardContent className="py-4 text-sm">
               <a
                 href="https://maps.app.goo.gl/ieAQ1ymuqT1w7w1s7"
                 target="_blank"
@@ -116,8 +128,8 @@ export default function AboutPage() {
               >
                 Open in Google Maps
               </a>
-            </div>
-          </article>
+            </CardContent>
+          </Card>
         </div>
       </section>
     </main>
