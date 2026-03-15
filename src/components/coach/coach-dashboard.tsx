@@ -5,7 +5,6 @@ import { useTRPC } from "@/lib/trpc/client";
 import { useQuery } from "@tanstack/react-query";
 import { LoadingState } from "@/components/ui/loading-state";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import {
   Collapsible,
   CollapsibleContent,
@@ -60,10 +59,13 @@ export function CoachDashboard() {
           open={openSections.has(id)}
           onOpenChange={() => toggleSection(id)}
         >
-          <Card>
-            <CollapsibleTrigger asChild>
-              <CardHeader className="cursor-pointer select-none hover:bg-muted/50 transition-colors">
-                <div className="flex items-center justify-between">
+          <Card className="gap-0 py-0">
+            <CardHeader className="p-0">
+              <CollapsibleTrigger asChild>
+                <button
+                  type="button"
+                  className="flex w-full cursor-pointer select-none items-center justify-between rounded-t-xl border-b border-border/70 px-6 py-4 text-left transition-colors hover:bg-muted/50"
+                >
                   <div className="flex items-center gap-2">
                     <Icon className="h-5 w-5 text-muted-foreground" />
                     <span className="text-lg font-semibold">{label}</span>
@@ -73,12 +75,11 @@ export function CoachDashboard() {
                   ) : (
                     <ChevronRight className="h-5 w-5 text-muted-foreground" />
                   )}
-                </div>
-              </CardHeader>
-            </CollapsibleTrigger>
+                </button>
+              </CollapsibleTrigger>
+            </CardHeader>
             <CollapsibleContent>
-              <Separator />
-              <CardContent className="pt-6">
+              <CardContent className="px-6 py-6">
                 {id === "profile" && profile && <ProfileSettings key={profile.slug} profile={profile} />}
                 {id === "availability" && profile && (
                   <AvailabilityEditor
