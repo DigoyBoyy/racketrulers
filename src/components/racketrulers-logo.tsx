@@ -40,7 +40,7 @@ function LogoMark({
 }) {
   return (
     <Image
-      src="/logo-mark.png"
+      src="/logo.png"
       alt="RacketRulers"
       width={1499}
       height={1362}
