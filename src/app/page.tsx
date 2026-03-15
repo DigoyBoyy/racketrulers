@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { RacketRulersLogo } from "@/components/racketrulers-logo";
 import { SiteHeader } from "@/components/public/site-header";
@@ -53,6 +54,17 @@ export default function HomePage() {
 
       {/* ─── Hero ─── */}
       <section className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pb-16">
+        {/* Hero image */}
+        <div className="pointer-events-none absolute inset-0">
+          <Image
+            src="/MainPageBackground.jpg"
+            alt=""
+            fill
+            priority
+            className="object-cover opacity-[0.52]"
+          />
+        </div>
+
         {/* Grid pattern */}
         <div className="hero-grid absolute inset-0 text-foreground opacity-[0.04]" />
 

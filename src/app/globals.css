@@ -73,12 +73,12 @@
   --chart-5: oklch(0.6 0.2 300);
   --sidebar: oklch(0.3283 0.012 222.36);
   --sidebar-foreground: oklch(0.94 0.02 98);
-  --sidebar-primary: oklch(0.48 0.16 150);
+  --sidebar-primary: oklch(0.7578 0.1513 81.77);
   --sidebar-primary-foreground: oklch(0.99 0 0);
   --sidebar-accent: oklch(0.35 0.014 214.53);
   --sidebar-accent-foreground: oklch(0.95 0.018 98);
   --sidebar-border: oklch(0.38 0.01 214.53);
-  --sidebar-ring: oklch(0.48 0.16 150);
+  --sidebar-ring: oklch(0.7578 0.1513 81.77);
 }
 
 @layer base {
