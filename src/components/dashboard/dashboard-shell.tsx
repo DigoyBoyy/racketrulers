@@ -7,6 +7,7 @@ import { signOut } from "next-auth/react";
 import {
   BookOpen,
   Calendar,
+  Info,
   LogOut,
   Menu,
   Trophy,
@@ -41,6 +42,11 @@ interface DashboardShellProps {
 }
 
 const navItems = [
+  {
+    title: "About Us",
+    href: "/about",
+    icon: Info,
+  },
   {
     title: "Book Coach",
     href: "/book/coach-john",
