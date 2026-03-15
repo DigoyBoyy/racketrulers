@@ -2,17 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { RacketRulersLogo } from "@/components/racketrulers-logo";
 import { SiteHeader } from "@/components/public/site-header";
 import {
   Trophy,
   Zap,
   Calendar,
   Users,
-  ArrowRight,
-  Phone,
-  Mail,
-  MapPin,
 } from "lucide-react";
 
 const features = [
@@ -41,12 +36,6 @@ const features = [
       "Manage teams, rosters, seedings, and court assignments. Handle multi-day badminton events with drag-and-drop scheduling.",
   },
 ];
-
-const companyDetails = {
-  phone: "09155349949",
-  email: "mjapuli10@gmail.com",
-  courts: ["Smashplus, Valenzuela", "Victoria Sports Tower, Quezon City"],
-};
 
 export default function HomePage() {
   return (
@@ -345,73 +334,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Footer ─── */}
-      {/* <footer className="border-t border-border/40 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
-          <RacketRulersLogo size={28} />
-          <p className="text-sm text-muted-foreground">
-            Badminton tournament management and coaching platform
-          </p>
-        </div>
-      </footer> */}
-      <footer className="border-t border-border/40 py-10">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col gap-8 md:flex-row md:justify-between">
-            <div>
-              <RacketRulersLogo size={28} />
-              <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                Badminton tournament management and coaching platform.
-              </p>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-3">
-              {/* Phone */}
-              <div>
-                <div className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-primary" />
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Phone
-                  </p>
-                </div>
-                <p className="mt-2 text-sm font-medium">
-                  {companyDetails.phone}
-                </p>
-              </div>
-
-              {/* Email */}
-              <div>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-primary" />
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Email
-                  </p>
-                </div>
-                <a
-                  href={`mailto:${companyDetails.email}`}
-                  className="mt-2 block text-sm font-medium hover:text-primary"
-                >
-                  {companyDetails.email}
-                </a>
-              </div>
-
-              {/* Home Court */}
-              <div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
-                    Home Court
-                  </p>
-                </div>
-                <ul className="mt-2 space-y-1 text-sm font-medium">
-                  {companyDetails.courts.map((court) => (
-                    <li key={court}>{court}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
