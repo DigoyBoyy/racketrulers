@@ -64,16 +64,16 @@ export function CoachDashboard() {
               <CollapsibleTrigger asChild>
                 <button
                   type="button"
-                  className="flex w-full cursor-pointer select-none items-center justify-between rounded-t-xl border-b border-border/70 px-6 py-4 text-left transition-colors hover:bg-muted/50"
+                  className="flex w-full cursor-pointer select-none items-center justify-between rounded-t-xl border-b border-border/70 bg-card-header px-6 py-4 text-left text-card-header-foreground transition-colors hover:bg-muted/50"
                 >
                   <div className="flex items-center gap-2">
-                    <Icon className="h-5 w-5 text-muted-foreground" />
+                    <Icon className="h-5 w-5 text-card-header-foreground/80" />
                     <span className="text-lg font-semibold">{label}</span>
                   </div>
                   {openSections.has(id) ? (
-                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                    <ChevronDown className="h-5 w-5 text-card-header-foreground/80" />
                   ) : (
-                    <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                    <ChevronRight className="h-5 w-5 text-card-header-foreground/80" />
                   )}
                 </button>
               </CollapsibleTrigger>
