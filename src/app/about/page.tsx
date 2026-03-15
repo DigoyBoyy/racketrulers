@@ -7,9 +7,9 @@ const values = [
   },
   {
     index: "02",
-    title: "Community First",
+    title: "Powered by RacketRulers",
     description:
-      "RacketRulers supports coaches, players, organizers, and families in one workflow.",
+      "A platform built to help players play, compete, and improve.",
   },
   {
     index: "03",

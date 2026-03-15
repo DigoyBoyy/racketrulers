@@ -57,7 +57,7 @@ export default function HomePage() {
         {/* Hero image */}
         <div className="pointer-events-none absolute inset-0">
           <Image
-            src="/MainPageBackground.jpg"
+            src="/MainPageBackground2.jpg"
             alt=""
             fill
             priority
