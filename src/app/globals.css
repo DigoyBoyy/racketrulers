@@ -132,3 +132,8 @@
   box-shadow: 0 0 20px oklch(0.48 0.16 150 / 0.15);
 }
 
+/* ─── Card shadows ─── */
+.card-solid-shadow {
+  box-shadow: 5px 6px 0 oklch(0.12 0.02 260 / 1);
+}
+
