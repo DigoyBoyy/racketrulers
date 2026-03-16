@@ -72,9 +72,7 @@ export default function HomePage() {
             className="animate-fade-up text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="bg-gradient-to-r from-primary to-chart-2 bg-clip-text text-transparent text-6xl sm:text-8xl lg:text-9xl">
-              RacketRulers.
-            </span>
+
             <br />
             <span className="text-[oklch(0.86_0.09_92)]">
               Book a coach. Compete like a pro.
