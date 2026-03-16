@@ -194,11 +194,11 @@ export default function HomePage() {
           <GallerySlideshow
             images={[
               {
-                src: "/gallery/image1.jpg",
+                src: "/Gallery/image1.jpg",
                 alt: "Coaching session at the court",
               },
               {
-                src: "/gallery/image2.jpg",
+                src: "/Gallery/image2.jpg",
                 alt: "Players training during coach-led practice",
               },
             ]}
@@ -365,11 +365,11 @@ export default function HomePage() {
         <GallerySlideshow
           images={[
             {
-              src: "/gallery/poster1.jpg",
+              src: "/Gallery/poster1.jpg",
               alt: "badminton coaching",
             },
             {
-              src: "/gallery/poster2.jpg",
+              src: "/Gallery/poster2.jpg",
               alt: "string services",
             },
           ]}
