@@ -43,9 +43,9 @@ export default function HomePage() {
       <SiteHeader />
 
       {/* ─── Hero ─── */}
-      <section className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden pb-16">
+      <section className="relative mt-10 flex min-h-[100dvh] items-center justify-center overflow-hidden pb-16">
         {/* Hero image */}
-        <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-6">
+        <div className="pointer-events-none absolute inset-0 flex items-start justify-center pt-0 sm:pt-6">
           <Image
             src="/MainPageBackground4.jpg"
             alt=""
@@ -53,9 +53,12 @@ export default function HomePage() {
             width={1600}
             height={900}
             sizes="(min-width: 1536px) 1200px, 92vw"
-            className="h-auto w-[min(140vw,1200px)] opacity-[1]"
+            className="h-[100dvh] w-auto max-w-none object-cover opacity-[1] landscape:h-auto landscape:w-full"
           />
         </div>
+
+        {/* Adjustment layer */}
+        <div className="pointer-events-none absolute inset-0 bg-black/35" />
 
         {/* Grid pattern */}
 
@@ -69,7 +72,7 @@ export default function HomePage() {
             className="animate-fade-up text-5xl font-bold tracking-tight sm:text-7xl lg:text-8xl"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="bg-gradient-to-r from-primary to-chart-2 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary to-chart-2 bg-clip-text text-transparent text-6xl sm:text-8xl lg:text-9xl">
               RacketRulers.
             </span>
             <br />
@@ -85,14 +88,14 @@ export default function HomePage() {
           >
             <Button
               size="lg"
-              className="glow-primary h-12 px-8 text-base"
+              className="glow-mainpage-button h-12 px-8 text-base"
               asChild
             >
               <Link href="/book">Book a Coach</Link>
             </Button>
             <Button
               size="lg"
-              className="glow-primary h-12 px-8 text-base"
+              className="glow-mainpage-button h-12 px-8 text-base"
               asChild
             >
               <Link href="/tournaments">Browse Tournaments</Link>

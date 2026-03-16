@@ -34,6 +34,7 @@
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
+  --color-header-background: var(--header-background);
   --color-card-header: var(--card-header);
   --color-card-header-foreground: var(--card-header-foreground);
   --color-card-foreground: var(--card-foreground);
@@ -58,6 +59,7 @@
   --card-foreground: oklch(0.32 0.02 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0.02 260);
+  --header-background: oklch(0.3283 0.012 222.36);
   --primary: oklch(0.7578 0.1513 81.77);
   --primary-foreground: oklch(0.3283 0.012 222.36); 
   --secondary: oklch(0.7578 0.1513 81.77);
@@ -132,18 +134,11 @@
   box-shadow: 0 0 20px oklch(0.48 0.16 150 / 0.15);
 }
 
+.glow-mainpage-button {
+  box-shadow: 5px 6px 0 oklch(0.86 0.09 92);
+}
+
 /* ─── Card shadows ─── */
 .card-solid-shadow {
-  box-shadow: 5px 6px 0 oklch(0.12 0.02 260 / 1);
+  box-shadow: 5px 6px 0 oklch(0.3283 0.012 222.36 / 1);
 }
-
-/* ─── App background gradient ─── */
-.app-gradient {
-  background-image: linear-gradient(
-    135deg,
-    oklch(0.82 0.14 70 / 0.34) 0%,
-    oklch(0.32 0.08 150 / 0.4) 100%
-  );
-  background-attachment: fixed;
-}
-

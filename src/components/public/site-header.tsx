@@ -37,7 +37,7 @@ export function SiteHeader() {
     : "U";
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
+    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-header-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/">
           <RacketRulersLogo size={36} variant="full" />

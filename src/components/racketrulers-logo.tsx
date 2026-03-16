@@ -19,7 +19,7 @@ export function RacketRulersLogo({
       <div className={cn("flex items-center gap-2.5", className)}>
         <LogoMark size={size} inverse={inverse} />
         <span className="text-lg font-bold tracking-tight">
-          Racket
+          <span className={inverse ? "opacity-80" : "text-[oklch(0.86_0.09_92)]"}>Racket</span>
           <span className={inverse ? "opacity-80" : "text-primary"}>Rulers</span>
         </span>
       </div>
