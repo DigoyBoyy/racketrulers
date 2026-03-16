@@ -88,14 +88,14 @@ export default function HomePage() {
           >
             <Button
               size="lg"
-              className="glow-mainpage-button h-12 px-8 text-base"
+              className="glow-mainpage-button h-14 px-10 text-lg font-bold hover:bg-[oklch(0.3283_0.012_222.36_/_1)] hover:text-[oklch(0.86_0.09_92)]"
               asChild
             >
               <Link href="/book">Book a Coach</Link>
             </Button>
             <Button
               size="lg"
-              className="glow-mainpage-button h-12 px-8 text-base"
+              className="glow-mainpage-button h-14 px-10 text-lg font-bold hover:bg-[oklch(0.3283_0.012_222.36_/_1)] hover:text-[oklch(0.86_0.09_92)]"
               asChild
             >
               <Link href="/tournaments">Browse Tournaments</Link>
