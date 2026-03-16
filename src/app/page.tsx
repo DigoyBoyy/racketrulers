@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SiteHeader } from "@/components/public/site-header";
+import { GallerySlideshow } from "@/components/public/gallery-slideshow";
 import {
   Trophy,
   Zap,
@@ -185,6 +186,19 @@ export default function HomePage() {
               <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides.
             </p>
           </div>
+
+          <GallerySlideshow
+            images={[
+              {
+                src: "/gallery/image1.jpg",
+                alt: "Coaching session at the court",
+              },
+              {
+                src: "/gallery/image2.jpg",
+                alt: "Players training during coach-led practice",
+              },
+            ]}
+          />
         </div>
       </section>
 
