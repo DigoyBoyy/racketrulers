@@ -12,7 +12,9 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:seed:clients": "tsx prisma/client-seed.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "db:coach:name": "tsx prisma/update-coach-name.ts",
+    "db:coach:slug": "tsx prisma/update-coach-slug.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
