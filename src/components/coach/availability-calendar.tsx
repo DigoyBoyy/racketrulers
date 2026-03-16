@@ -291,7 +291,7 @@ export function AvailabilityCalendar({
 
       <div className="overflow-x-auto">
         <div
-          className="grid min-w-[600px]"
+          className="grid min-w-full sm:min-w-[600px]"
           style={{ gridTemplateColumns: "60px repeat(7, 1fr)" }}
         >
           {/* Header row */}

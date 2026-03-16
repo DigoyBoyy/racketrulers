@@ -67,81 +67,143 @@ export function BookingsList() {
   return (
     <div className="space-y-4">
       <Tabs value={filter} onValueChange={handleFilterChange}>
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="CONFIRMED">Confirmed</TabsTrigger>
-          <TabsTrigger value="CANCELLED">Cancelled</TabsTrigger>
-          <TabsTrigger value="past">Past</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto">
+          <TabsList className="whitespace-nowrap">
+            <TabsTrigger value="all">All</TabsTrigger>
+            <TabsTrigger value="CONFIRMED">Confirmed</TabsTrigger>
+            <TabsTrigger value="CANCELLED">Cancelled</TabsTrigger>
+            <TabsTrigger value="past">Past</TabsTrigger>
+          </TabsList>
+        </div>
       </Tabs>
 
       {isLoading ? (
         <LoadingState text="Loading bookings..." />
       ) : bookings.length > 0 ? (
         <>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Time</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Email</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Message</TableHead>
-                <TableHead className="w-[80px]">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {bookings.map((booking) => (
-                <TableRow key={booking.id}>
-                  <TableCell>
-                    {new Date(booking.date).toLocaleDateString()}
-                  </TableCell>
-                  <TableCell>
-                    {booking.startTime} - {booking.endTime}
-                  </TableCell>
-                  <TableCell>{booking.bookerName}</TableCell>
-                  <TableCell className="text-xs">
-                    {booking.bookerEmail}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        booking.status === "CONFIRMED" ? "default" : "secondary"
-                      }
-                    >
-                      {booking.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-xs max-w-[150px] truncate">
-                    {booking.message || "-"}
-                  </TableCell>
-                  <TableCell>
-                    {booking.status === "CONFIRMED" && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-destructive h-7 text-xs"
-                        onClick={() =>
-                          setCancelTarget({
-                            id: booking.id,
-                            name: booking.bookerName,
-                            date: new Date(booking.date).toISOString().split("T")[0],
-                            time: booking.startTime,
-                          })
+          <div className="space-y-3 md:hidden">
+            {bookings.map((booking) => (
+              <div key={booking.id} className="rounded-lg border bg-card p-4 space-y-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-medium">{booking.bookerName}</p>
+                    <p className="text-xs text-muted-foreground break-all">
+                      {booking.bookerEmail}
+                    </p>
+                  </div>
+                  <Badge
+                    variant={
+                      booking.status === "CONFIRMED" ? "default" : "secondary"
+                    }
+                  >
+                    {booking.status}
+                  </Badge>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <div>
+                    <p className="text-xs text-muted-foreground">Date</p>
+                    <p>{new Date(booking.date).toLocaleDateString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Time</p>
+                    <p>
+                      {booking.startTime} - {booking.endTime}
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs text-muted-foreground">Message</p>
+                  <p className="text-sm break-words">{booking.message || "-"}</p>
+                </div>
+
+                {booking.status === "CONFIRMED" && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-destructive h-8 px-0 text-xs"
+                    onClick={() =>
+                      setCancelTarget({
+                        id: booking.id,
+                        name: booking.bookerName,
+                        date: new Date(booking.date).toISOString().split("T")[0],
+                        time: booking.startTime,
+                      })
+                    }
+                  >
+                    Cancel
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Time</TableHead>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Message</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {bookings.map((booking) => (
+                  <TableRow key={booking.id}>
+                    <TableCell>
+                      {new Date(booking.date).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell>
+                      {booking.startTime} - {booking.endTime}
+                    </TableCell>
+                    <TableCell>{booking.bookerName}</TableCell>
+                    <TableCell className="text-xs">
+                      {booking.bookerEmail}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          booking.status === "CONFIRMED" ? "default" : "secondary"
                         }
                       >
-                        Cancel
-                      </Button>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                        {booking.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-xs truncate">
+                      {booking.message || "-"}
+                    </TableCell>
+                    <TableCell>
+                      {booking.status === "CONFIRMED" && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-destructive h-7 text-xs"
+                          onClick={() =>
+                            setCancelTarget({
+                              id: booking.id,
+                              name: booking.bookerName,
+                              date: new Date(booking.date).toISOString().split("T")[0],
+                              time: booking.startTime,
+                            })
+                          }
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-4 pt-2">
+            <div className="flex flex-col items-center justify-center gap-3 pt-2 sm:flex-row sm:gap-4">
               <Button
                 variant="outline"
                 size="sm"

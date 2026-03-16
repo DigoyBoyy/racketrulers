@@ -148,8 +148,9 @@ export function AvailabilityEditor({ initialSlots }: AvailabilityEditorProps) {
             return (
               <Button
                 key={idx}
-                variant={isSelected ? "default" : "outline"}
+                variant="ghost"
                 size="sm"
+                className={isSelected ? "border-0 bg-transparent text-primary font-semibold hover:bg-transparent" : "border-0 bg-transparent hover:bg-transparent"}
                 onClick={() => selectWeek(monday)}
               >
                 Week {idx + 1}: {startStr} - {endStr}
