@@ -362,6 +362,22 @@ export default function HomePage() {
             </Card>
           </div>
         </div>
+        <GallerySlideshow
+          images={[
+            {
+              src: "/gallery/poster1.jpg",
+              alt: "badminton coaching",
+            },
+            {
+              src: "/gallery/poster2.jpg",
+              alt: "string services",
+            },
+          ]}
+          fit="contain"
+          aspectClassName="aspect-[3/4]"
+          className="max-w-2xl"
+          frameBackgroundClassName="bg-black/90"
+        />
       </section>
 
     </div>

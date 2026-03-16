@@ -11,9 +11,20 @@ interface GallerySlideshowProps {
     alt: string;
   }[];
   intervalMs?: number;
+  fit?: "cover" | "contain";
+  aspectClassName?: string;
+  className?: string;
+  frameBackgroundClassName?: string;
 }
 
-export function GallerySlideshow({ images, intervalMs = 4500 }: GallerySlideshowProps) {
+export function GallerySlideshow({
+  images,
+  intervalMs = 4500,
+  fit = "cover",
+  aspectClassName = "aspect-[16/9]",
+  className,
+  frameBackgroundClassName = "bg-card",
+}: GallerySlideshowProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -36,9 +47,13 @@ export function GallerySlideshow({ images, intervalMs = 4500 }: GallerySlideshow
     setActiveIndex((prev) => (prev + 1) % images.length);
   }
 
+  const fitClass = fit === "contain" ? "object-contain" : "object-cover";
+
   return (
-    <div className="mx-auto mt-8 w-full max-w-4xl">
-      <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-border/60 bg-card">
+    <div className={`mx-auto mt-8 w-full max-w-4xl ${className ?? ""}`}>
+      <div
+        className={`relative overflow-hidden rounded-2xl border border-border/60 ${aspectClassName} ${frameBackgroundClassName}`}
+      >
         {images.map((image, idx) => (
           <Image
             key={image.src}
@@ -46,7 +61,7 @@ export function GallerySlideshow({ images, intervalMs = 4500 }: GallerySlideshow
             alt={image.alt}
             fill
             sizes="(min-width: 1024px) 896px, 92vw"
-            className={`object-cover transition-opacity duration-700 ${
+            className={`${fitClass} transition-opacity duration-700 ${
               idx === activeIndex ? "opacity-100" : "opacity-0"
             }`}
             priority={idx === 0}
