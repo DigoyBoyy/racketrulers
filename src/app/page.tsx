@@ -181,7 +181,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="text-center">
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] ">
               <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides.
             </p>
           </div>
