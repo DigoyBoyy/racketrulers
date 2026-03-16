@@ -147,3 +147,12 @@
 .card-solid-shadow {
   box-shadow: 5px 6px 0 oklch(0.3283 0.012 222.36 / 1);
 }
+
+.card-solid-shadow-hover {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card-solid-shadow-hover:hover {
+  box-shadow: 10px 12px 8 oklch(0.3283 0.012 222.36 / 1);
+  transform: translate(-2px, -2px);
+}

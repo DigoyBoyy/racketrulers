@@ -49,7 +49,7 @@ const navItems = [
   },
   {
     title: "Book Coach",
-    href: "/book/coach-john",
+    href: "/book/coach-michael",
     icon: BookOpen,
   },
   {

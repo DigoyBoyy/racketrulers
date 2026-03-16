@@ -130,7 +130,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
                 1
               </div>
@@ -141,7 +141,7 @@ export default function HomePage() {
             </div>
 
             {/* Step 2 */}
-            <div className="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
                 2
               </div>
@@ -153,7 +153,7 @@ export default function HomePage() {
             </div>
 
             {/* Step 3 */}
-            <div className="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
                 3
               </div>
@@ -167,7 +167,7 @@ export default function HomePage() {
             </div>
 
             {/* Step 4 */}
-            <div className="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
                 4
               </div>
@@ -179,6 +179,11 @@ export default function HomePage() {
                 time.
               </p>
             </div>
+          </div>
+          <div className="text-center">
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+              <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides.
+            </p>
           </div>
         </div>
       </section>
@@ -203,7 +208,7 @@ export default function HomePage() {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="group relative overflow-hidden rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60"
+                className="card-solid-shadow card-solid-shadow-hover group relative overflow-hidden rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative">

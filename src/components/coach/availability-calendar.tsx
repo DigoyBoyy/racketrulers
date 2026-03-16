@@ -18,7 +18,7 @@ import { cn, getMonday } from "@/lib/utils";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const START_HOUR = 6;
-const END_HOUR = 22;
+const END_HOUR = 24;
 const SLOT_MINUTES = 30;
 const TOTAL_ROWS = ((END_HOUR - START_HOUR) * 60) / SLOT_MINUTES;
 
@@ -58,8 +58,9 @@ function rowToTime(row: number): string {
 
 function formatTime(time: string): string {
   const [h, m] = time.split(":").map(Number);
-  const hour = h % 12 || 12;
-  const ampm = h < 12 ? "AM" : "PM";
+  const normalizedHour = h % 24;
+  const hour = normalizedHour % 12 || 12;
+  const ampm = normalizedHour < 12 ? "AM" : "PM";
   return `${hour}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
