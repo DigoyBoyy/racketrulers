@@ -118,9 +118,12 @@ export default function HomePage() {
       <section id="how-to-book" className="border-t border-border/40 py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            <Link
+              href="/book"
+              className="inline-flex items-center rounded-md border border-primary bg-transparent px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-primary transition-colors hover:bg-transparent hover:text-primary"
+            >
               Booking
-            </p>
+            </Link>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               How to Book a Coach
             </h2>
@@ -183,7 +186,8 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] ">
-              <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides.
+              <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides. <br></br>
+              Training can be conducted at your preferred court, subject to mutual accessibility.
             </p>
           </div>
 
