@@ -189,16 +189,19 @@ export default function HomePage() {
       </section>
 
       {/* ─── Features ─── */}
-      <section id="features" className="border-t border-border/40 py-24">
+      <section
+        id="features"
+        className="border-t border-border/40 bg-[oklch(0.3283_0.012_222.36_/_1)] py-24"
+      >
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[oklch(0.7578_0.1513_81.77)]">
               Features
             </p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[oklch(0.86_0.09_92)] sm:text-4xl">
               Everything you need to compete
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-[oklch(0.7578_0.1513_81.77)]">
               From coaching sessions to live set-by-set scoring, RacketRulers
               handles every aspect of your badminton events.
             </p>
@@ -208,17 +211,17 @@ export default function HomePage() {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="card-solid-shadow card-solid-shadow-hover group relative overflow-hidden rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60"
+                className="glow-mainpage-button group relative overflow-hidden rounded-xl border border-transparent bg-[oklch(0.7578_0.1513_81.77)] p-8 text-[oklch(0.3283_0.012_222.36)] transition-all duration-300 hover:border-[oklch(0.86_0.09_92)] hover:bg-[oklch(0.3283_0.012_222.36_/_1)] hover:text-[oklch(0.86_0.09_92)]"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/15 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative">
-                  <div className="inline-flex rounded-lg border border-border/50 bg-background/50 p-2.5">
-                    <feature.icon className="h-5 w-5 text-primary" />
+                  <div className="inline-flex rounded-lg border border-current/20 bg-black/10 p-2.5 transition-colors duration-300 group-hover:bg-white/10">
+                    <feature.icon className="h-5 w-5 text-current" />
                   </div>
                   <h3 className="mt-4 text-lg font-semibold">
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-2 text-sm leading-relaxed text-[oklch(0.3283_0.012_222.36_/_0.78)] transition-colors duration-300 group-hover:text-[oklch(0.7578_0.1513_81.77)]">
                     {feature.description}
                   </p>
                 </div>
