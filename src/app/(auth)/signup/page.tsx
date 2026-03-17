@@ -25,7 +25,7 @@ export default function SignupPage() {
     setError(null);
 
     const formData = new FormData(e.currentTarget);
-    const adminCode = formData.get("adminCode") as string;
+    const adminCode = formData.get("adminCode") as string | null;
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -36,13 +36,19 @@ export default function SignupPage() {
       return;
     }
 
-    if (role === "coach" && !adminCode.trim()) {
+    if (role === "coach" && !adminCode?.trim()) {
       setError("Admin code is required for coach signup");
       return;
     }
 
     try {
-      await signup.mutateAsync({ adminCode, name, email, password });
+      await signup.mutateAsync({
+        adminCode: adminCode ?? undefined,
+        role: role === "coach" ? "ADMIN" : "CLIENT",
+        name,
+        email,
+        password,
+      });
       router.push("/login");
     } catch (err: unknown) {
       const message =

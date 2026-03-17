@@ -7,27 +7,30 @@ export const authRouter = createTRPCRouter({
   signup: baseProcedure
     .input(
       z.object({
-        adminCode: z.string().min(1, "Admin code is required"),
+        adminCode: z.string().optional(),
+        role: z.enum(["ADMIN", "CLIENT"]).optional().default("CLIENT"),
         name: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email"),
         password: z.string().min(8, "Password must be at least 8 characters"),
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const rawCodes = process.env.ADMIN_CODES;
-      if (!rawCodes) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: "Signup is currently disabled",
-        });
-      }
+      if (input.role === "ADMIN") {
+        const rawCodes = process.env.ADMIN_CODES;
+        if (!rawCodes) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Signup is currently disabled",
+          });
+        }
 
-      const validCodes = rawCodes.split(",").map((c) => c.trim().toUpperCase());
-      if (!validCodes.includes(input.adminCode.trim().toUpperCase())) {
-        throw new TRPCError({
-          code: "FORBIDDEN",
-          message: "Invalid admin code",
-        });
+        const validCodes = rawCodes.split(",").map((c) => c.trim().toUpperCase());
+        if (!input.adminCode || !validCodes.includes(input.adminCode.trim().toUpperCase())) {
+          throw new TRPCError({
+            code: "FORBIDDEN",
+            message: "Invalid admin code",
+          });
+        }
       }
 
       const existing = await ctx.prisma.user.findUnique({
@@ -48,7 +51,7 @@ export const authRouter = createTRPCRouter({
           name: input.name,
           email: input.email,
           password: hashedPassword,
-          role: 'ADMIN',
+          role: input.role ?? "CLIENT",
         },
       });
 
