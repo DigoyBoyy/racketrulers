@@ -120,7 +120,7 @@ export default function HomePage() {
           <div className="text-center">
             <Link
               href="/book"
-              className="inline-flex items-center rounded-md border border-primary bg-transparent px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-primary transition-colors hover:bg-transparent hover:text-primary"
+              className="inline-flex items-center rounded-md border border-[oklch(0.3283_0.012_222.36)] bg-transparent px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-[oklch(0.3283_0.012_222.36)] transition-colors hover:bg-transparent hover:text-[oklch(0.3283_0.012_222.36)]"
             >
               Booking
             </Link>
@@ -134,8 +134,8 @@ export default function HomePage() {
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[oklch(0.3283_0.012_222.36)]/40 hover:bg-card/60">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.3283_0.012_222.36)]/10 font-semibold text-[oklch(0.3283_0.012_222.36)]">
                 1
               </div>
               <h3 className="mt-4 text-lg font-semibold">Sign Up or Sign In</h3>
@@ -145,8 +145,8 @@ export default function HomePage() {
             </div>
 
             {/* Step 2 */}
-            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[oklch(0.3283_0.012_222.36)]/40 hover:bg-card/60">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.3283_0.012_222.36)]/10 font-semibold text-[oklch(0.3283_0.012_222.36)]">
                 2
               </div>
               <h3 className="mt-4 text-lg font-semibold">Choose a Schedule</h3>
@@ -157,8 +157,8 @@ export default function HomePage() {
             </div>
 
             {/* Step 3 */}
-            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[oklch(0.3283_0.012_222.36)]/40 hover:bg-card/60">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.3283_0.012_222.36)]/10 font-semibold text-[oklch(0.3283_0.012_222.36)]">
                 3
               </div>
               <h3 className="mt-4 text-lg font-semibold">
@@ -171,8 +171,8 @@ export default function HomePage() {
             </div>
 
             {/* Step 4 */}
-            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-primary/40 hover:bg-card/60">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 font-semibold text-primary">
+            <div className="card-solid-shadow card-solid-shadow-hover rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm transition-all duration-300 hover:border-[oklch(0.3283_0.012_222.36)]/40 hover:bg-card/60">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.3283_0.012_222.36)]/10 font-semibold text-[oklch(0.3283_0.012_222.36)]">
                 4
               </div>
               <h3 className="mt-4 text-lg font-semibold">

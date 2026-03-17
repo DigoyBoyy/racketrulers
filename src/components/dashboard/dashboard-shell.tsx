@@ -57,14 +57,14 @@ const navItems = [
     href: "/dashboard/tournaments",
     icon: Trophy,
   },
+];
+
+const adminNavItems = [
   {
     title: "Coach Scheduler",
     href: "/dashboard/coach",
     icon: Calendar,
   },
-];
-
-const adminNavItems = [
   {
     title: "Create Admin User",
     href: "/dashboard/admin/create-user",
