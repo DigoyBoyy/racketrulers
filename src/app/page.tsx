@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -38,7 +40,18 @@ const features = [
   },
 ];
 
+function getSlider1Images() {
+  const dir = path.join(process.cwd(), "public", "Gallery", "Slider1_Pictures");
+  const exts = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"]);
+  return fs
+    .readdirSync(dir)
+    .filter((f) => exts.has(path.extname(f).toLowerCase()))
+    .sort()
+    .map((f) => ({ src: `/Gallery/Slider1_Pictures/${f}`, alt: f.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ") }));
+}
+
 export default function HomePage() {
+  const slider1Images = getSlider1Images();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -186,23 +199,12 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] ">
-              <br></br><br></br>We can train on your preferred court as long as it is accessible for both sides. <br></br>
+              <br></br><br></br>
               Training can be conducted at your preferred court, subject to mutual accessibility.
             </p>
           </div>
 
-          <GallerySlideshow
-            images={[
-              {
-                src: "/Gallery/image1.jpg",
-                alt: "Coaching session at the court",
-              },
-              {
-                src: "/Gallery/image2.jpg",
-                alt: "Players training during coach-led practice",
-              },
-            ]}
-          />
+          <GallerySlideshow images={slider1Images} />
         </div>
       </section>
 
