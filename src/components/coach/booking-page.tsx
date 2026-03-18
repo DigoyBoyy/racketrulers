@@ -11,15 +11,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingState } from "@/components/ui/loading-state";
 import { MonthCalendar } from "@/components/ui/month-calendar";
+import { GallerySlideshow } from "@/components/public/gallery-slideshow";
 import { WeekView } from "./week-view";
 import { BookingConfirmation } from "./booking-confirmation";
 import { toast } from "sonner";
 
 interface BookingPageProps {
   slug: string;
+  galleryImages?: {
+    src: string;
+    alt: string;
+  }[];
 }
 
-export function BookingPage({ slug }: BookingPageProps) {
+export function BookingPage({ slug, galleryImages = [] }: BookingPageProps) {
   const trpc = useTRPC();
   const [view, setView] = useState<"month" | "week">("month");
   const [selectedDate, setSelectedDate] = useState<string>("");
@@ -180,6 +185,15 @@ export function BookingPage({ slug }: BookingPageProps) {
           )}
         </CardContent>
       </Card>
+
+      {galleryImages.length > 0 && (
+        <GallerySlideshow
+          images={galleryImages}
+          fit="contain"
+          aspectClassName="aspect-[3/4]"
+          className="max-w-none"
+        />
+      )}
 
       {selectedSlot && (
         <Card>

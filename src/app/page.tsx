@@ -50,8 +50,19 @@ function getSlider1Images() {
     .map((f) => ({ src: `/Gallery/Slider1_Pictures/${f}`, alt: f.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ") }));
 }
 
+function getSlider2Images() {
+  const dir = path.join(process.cwd(), "public", "Gallery", "Slider2_Pictures");
+  const exts = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif"]);
+  return fs
+    .readdirSync(dir)
+    .filter((f) => exts.has(path.extname(f).toLowerCase()))
+    .sort()
+    .map((f) => ({ src: `/Gallery/Slider2_Pictures/${f}`, alt: f.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ") }));
+}
+
 export default function HomePage() {
   const slider1Images = getSlider1Images();
+  const slider2Images = getSlider2Images();
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -364,22 +375,7 @@ export default function HomePage() {
             </Card>
           </div>
         </div>
-        <GallerySlideshow
-          images={[
-            {
-              src: "/Gallery/poster1.jpg",
-              alt: "badminton coaching",
-            },
-            {
-              src: "/Gallery/poster2.jpg",
-              alt: "string services",
-            },
-          ]}
-          fit="contain"
-          aspectClassName="aspect-[3/4]"
-          className="max-w-2xl"
-          frameBackgroundClassName="bg-black/90"
-        />
+        <GallerySlideshow images={slider2Images} aspectClassName="aspect-[3/4]" />
       </section>
 
     </div>
